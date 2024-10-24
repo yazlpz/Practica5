@@ -1,4 +1,10 @@
-package PACKAGE_NAME;
+public class ExcepcionDeElementoNoEncontrado extends Exception {
 
-public class ExcepcionDeElementoNoEncontrado {
+    private static final long serialVersionUID = 1L;
+
+    public ExcepcionDeElementoNoEncontrado(String msg) {
+        super(msg);
+    }
+
 }
+

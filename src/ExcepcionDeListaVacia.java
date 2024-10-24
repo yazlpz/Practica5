@@ -1,4 +1,10 @@
-package PACKAGE_NAME;
+public class ExcepcionDeListaVacia extends Exception {
 
-public class ExcepcionDeListaVacia {
+    private static final long serialVersionUID = 1L;
+
+    public ExcepcionDeListaVacia(String msg) {
+        super(msg);
+    }
+
 }
+

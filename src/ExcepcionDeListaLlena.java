@@ -1,4 +1,9 @@
-package PACKAGE_NAME;
+public class ExcepcionDeListaLlena extends Exception {
 
-public class ExcepcionDeListaLlena {
+    private static final long serialVersionUID = 1L;
+
+    public ExcepcionDeListaLlena(String msg) {
+        super(msg);
+    }
 }
+
