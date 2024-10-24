@@ -1,5 +1,3 @@
-import javax.rmi.ssl.SslRMIClientSocketFactory;
-
 public class Experto {
     private String nombre;
     private String especialdad;
