@@ -9,6 +9,9 @@ public class Experto {
     private String telefonoContacto;
     private ListaDinamica<Agenda> agenda;
 
+    public Experto() {
+		super();
+	}
     public Experto (String nombre, String especialdad, String areaInteres,
                     String ubicacionFija, String contacto, String telefonoContacto /*Agenga[] agenda*/){
         this.nombre = nombre;
@@ -16,68 +19,12 @@ public class Experto {
         this.areaInteres = areaInteres;
         this.ubicacionFija = ubicacionFija;
         this.contacto = contacto;
-        this.telefonoContacto = telefonoContacto;
-        this.agenda = new ListaDinamica<>();
-    }
-
-    public boolean agregarCompromiso(Agenda compromiso){
-        try{
-            for(int i=1; i<= agenda.size(); i++){
-                Agenda c = agenda.getItem(i);
-                if (c.choca(agenda)){
-                    System.out.println("No se puede  agregar el compromiso");
-                    return false;
-                }
-            }
-            agenda.add(compromiso);
-            return true;
-        }catch (Exception e){
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    public boolean actualizarCompromiso(int index, String nuevasActividades, String nuevoEncargado, String nuevoTelefono) {
-        try {
-            Agenda compromiso = agenda.getItem(index);
-            compromiso.setActividades(nuevasActividades);
-            compromiso.setContacto(nuevoEncargado);
-            compromiso.setTelefonoEncargado(nuevoTelefono);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    public boolean eliminarCompromiso(int index) {
-        try {
-            agenda.delete(index);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    public void listarAgenda() {
-        if (agenda.isEmpty()) {
-            System.out.println("La agenda está vacía.");
-        } else {
-            try {
-                for (int i = 1; i <= agenda.size(); i++) {
-                    System.out.println(agenda.getItem(i));
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+        this.telefonoContacto = telefonoContacto;   
     }
 
     public String getNombre() {
         return nombre;
     }
-
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -85,7 +32,6 @@ public class Experto {
     public String getEspecialdad() {
         return especialdad;
     }
-
     public void setEspecialdad(String especialdad) {
         this.especialdad = especialdad;
     }
@@ -93,7 +39,6 @@ public class Experto {
     public String getAreaInteres() {
         return areaInteres;
     }
-
     public void setAreaInteres(String areaInteres) {
         this.areaInteres = areaInteres;
     }
@@ -101,7 +46,6 @@ public class Experto {
     public String getUbicacionFija() {
         return ubicacionFija;
     }
-
     public void setUbicacionFija(String ubicacionFija) {
         this.ubicacionFija = ubicacionFija;
     }
@@ -109,7 +53,6 @@ public class Experto {
     public String getContacto() {
         return contacto;
     }
-
     public void setContacto(String contacto) {
         this.contacto = contacto;
     }
@@ -117,8 +60,21 @@ public class Experto {
     public String getTelefonoContacto() {
         return telefonoContacto;
     }
-
     public void setTelefonoContacto(String telefonoContacto) {
         this.telefonoContacto = telefonoContacto;
     }
+
+    public ListaDinamica<Agenda> getAgenda() {
+        return this.agenda;
+    }
+
+    @Override
+	public String toString() {
+		return super.toString() + "\nNombre del experto: " + nombre +
+        "\nEspecialidad: " + especialdad +
+        "\nÁrea de interés: "+ areaInteres +
+        "\nUbicación fija: "+ ubicacionFija +
+        "\nContacto: "+ contacto +
+        "\nTel. de su contacto: "+ telefonoContacto;
+	}
 }

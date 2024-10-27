@@ -1,7 +1,5 @@
 package app;
-import exc.ExcepcionDeElementoNoEncontrado;
-import exc.ExcepcionDeListaLlena;
-import exc.ExcepcionDeListaVacia;
+import exc.*;
 
 public interface Lista<E> {
 

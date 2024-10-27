@@ -9,6 +9,19 @@ public class Agenda {
     private Experto contacto;
     private Experto telefonoContacto;
 
+    public Agenda(){
+        super();
+    }
+    public Agenda(Date fechaInicio, Date fechaFin, String ubicacion, String actividades, Experto contacto,
+                 Experto telefonoContacto){
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.ubicacion = ubicacion;
+        this.actividades = actividades;
+        this.contacto = contacto;
+        this.telefonoContacto = telefonoContacto;
+    }
+
     public Date getFechaInicio() {
         return this.fechaInicio;
     }
@@ -49,5 +62,9 @@ public class Agenda {
     }
     public void setTelefonoContacto(Experto telefonoContacto) {
         this.telefonoContacto = telefonoContacto;
+    }
+    public boolean choca(ListaDinamica<Agenda> agenda) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'choca'");
     }
 }
