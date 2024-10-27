@@ -1,3 +1,8 @@
+package app;
+import exc.ExcepcionDeElementoNoEncontrado;
+import exc.ExcepcionDeListaLlena;
+import exc.ExcepcionDeListaVacia;
+
 public interface Lista<E> {
 
     public void add(E item) throws ExcepcionDeListaLlena;

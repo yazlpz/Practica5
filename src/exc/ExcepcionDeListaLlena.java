@@ -1,3 +1,4 @@
+package exc;
 public class ExcepcionDeListaLlena extends Exception {
 
     private static final long serialVersionUID = 1L;

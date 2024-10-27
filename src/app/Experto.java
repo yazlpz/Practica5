@@ -1,3 +1,5 @@
+package app;
+
 public class Experto {
     private String nombre;
     private String especialdad;
@@ -22,7 +24,7 @@ public class Experto {
         try{
             for(int i=1; i<= agenda.size(); i++){
                 Agenda c = agenda.getItem(i);
-                if (c.choca(Agenda)){
+                if (c.choca(agenda)){
                     System.out.println("No se puede  agregar el compromiso");
                     return false;
                 }
@@ -39,7 +41,7 @@ public class Experto {
         try {
             Agenda compromiso = agenda.getItem(index);
             compromiso.setActividades(nuevasActividades);
-            compromiso.setEncargadoAtencion(nuevoEncargado);
+            compromiso.setContacto(nuevoEncargado);
             compromiso.setTelefonoEncargado(nuevoTelefono);
             return true;
         } catch (Exception e) {

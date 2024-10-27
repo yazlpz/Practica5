@@ -1,3 +1,4 @@
+package app;
 public class NodoLista<E> {
 
     private E item;

@@ -1,3 +1,9 @@
+package app;
+
+import exc.ExcepcionDeElementoNoEncontrado;
+import exc.ExcepcionDeListaLlena;
+import exc.ExcepcionDeListaVacia;
+
 public class ListaDinamica<E> implements Lista<E> {
 
     private NodoLista<E> p,u;
