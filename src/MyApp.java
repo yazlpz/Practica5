@@ -21,13 +21,13 @@ public class MyApp {
 
     public void guardarDatos() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("expertos.dat"))) {
-            oos.writeObject(expertos); // Suponiendo que 'expertos' es una lista de expertos
+            oos.writeObject(expertos);
         } catch (IOException e) {
             TJOption.imprimePantalla("Error al guardar datos: " + e.getMessage());
         }
     
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("agendas.dat"))) {
-            oos.writeObject(agenda); // Suponiendo que 'agenda' es una lista de compromisos
+            oos.writeObject(agenda);
         } catch (IOException e) {
             TJOption.imprimePantalla("Error al guardar datos: " + e.getMessage());
         }
@@ -38,23 +38,21 @@ public class MyApp {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("expertos.dat"))) {
             expertos = (ListaDinamica<Experto>) ois.readObject();
         } catch (FileNotFoundException e) {
-            // El archivo no existe, inicializamos la lista
             TJOption.imprimePantalla("No se encontraron datos de expertos, se iniciará con una lista vacía.");
-            expertos = new ListaDinamica<>(); // Inicializa una nueva lista
+            expertos = new ListaDinamica<>();
         } catch (IOException | ClassNotFoundException e) {
             TJOption.imprimePantalla("Error al cargar datos de expertos: " + e.getMessage());
-            expertos = new ListaDinamica<>(); // Inicializa una nueva lista si hay un error
+            expertos = new ListaDinamica<>();
         }
     
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("agendas.dat"))) {
             agenda = (ListaDinamica<Agenda>) ois.readObject();
         } catch (FileNotFoundException e) {
-            // El archivo no existe, inicializamos la lista
             TJOption.imprimePantalla("No se encontraron datos de agendas, se iniciará con una lista vacía.");
-            agenda = new ListaDinamica<>(); // Inicializa una nueva lista
+            agenda = new ListaDinamica<>();
         } catch (IOException | ClassNotFoundException e) {
             TJOption.imprimePantalla("Error al cargar datos de agendas: " + e.getMessage());
-            agenda = new ListaDinamica<>(); // Inicializa una nueva lista si hay un error
+            agenda = new ListaDinamica<>();
         }
     }
 
@@ -178,7 +176,6 @@ public class MyApp {
                     break;
                 }
     
-                // Verificar si el nuevo compromiso entra en conflicto con compromisos existentes del mismo experto
                 for (int j = 1; j <= agenda.size(); j++) {
                     Agenda compromisoExistente = agenda.getItem(j);
                     Date inicioExistente = compromisoExistente.getFechaInicio();
@@ -200,9 +197,6 @@ public class MyApp {
                 nuevoCompromiso.setFechaFin(fechaFin);
                 nuevoCompromiso.setUbicacion(TJOption.leerString("Ingrese la ubicación del lugar del compromiso"));
                 nuevoCompromiso.setActividades(TJOption.leerString("Ingrese la descripción de la actividad"));
-
-    
-                // Agregar el compromiso a la lista de agenda
                 agenda.add(nuevoCompromiso);
                 TJOption.imprimePantalla("Compromiso agregado exitosamente al experto: " + experto.getNombre());
                 return;
@@ -215,38 +209,30 @@ public class MyApp {
     public void actualizarCompromiso() throws ExcepcionDeListaVacia, ExcepcionDeElementoNoEncontrado {
         String nombreExperto = TJOption.leerString("Ingrese el nombre del experto para actualizar su compromiso:");
         Date fechaInicio = leerFecha("Ingrese la fecha de inicio del compromiso a actualizar");
-    
-        // Buscar el compromiso en la agenda
+
         for (int i = 1; i <= agenda.size(); i++) {
             Agenda compromisoExistente = agenda.getItem(i);
             Experto experto = expertos.getItem(i);
-    
-            // Verificar si el compromiso pertenece al experto y coincide la fecha de inicio
+
             if (experto.getNombre().equalsIgnoreCase(nombreExperto) &&
                 compromisoExistente.getFechaInicio().equals(fechaInicio)) {
-    
-                // Permitir actualizar los detalles del compromiso
+
                 TJOption.imprimePantalla("Compromiso encontrado. Actualice los detalles o presione Enter para mantener los actuales.");
-    
-                // Leer nueva fecha de fin
+
                 Date nuevaFechaFin = leerFecha("Ingrese la nueva fecha de fin del compromiso (dejar vacío para mantener):");
                 if (nuevaFechaFin != null) {
-                    // Validar que la nueva fecha de fin no sea anterior a la de inicio
                     if (nuevaFechaFin.before(compromisoExistente.getFechaInicio())) {
                         TJOption.imprimePantalla("La nueva fecha de fin no puede ser anterior a la fecha de inicio.");
                         return;
                     }
                     compromisoExistente.setFechaFin(nuevaFechaFin);
                 }
-    
-                // Leer nueva ubicación
+
                 String nuevaUbicacion = TJOption.leerString("Ingrese la nueva ubicación del compromiso (dejar vacío para mantener):");
                 if (!nuevaUbicacion.trim().isEmpty()) {
-                    // Verificar conflictos de ubicación
                     for (int j = 1; j <= agenda.size(); j++) {
                         Agenda otroCompromiso = agenda.getItem(j);
-                        
-                        // Comprobar si el compromiso existente no es el mismo y si hay solapamiento de fechas
+
                         if (!otroCompromiso.equals(compromisoExistente) &&
                             otroCompromiso.getUbicacion().equalsIgnoreCase(nuevaUbicacion) &&
                             (compromisoExistente.getFechaInicio().before(otroCompromiso.getFechaFin()) &&
@@ -257,8 +243,7 @@ public class MyApp {
                     }
                     compromisoExistente.setUbicacion(nuevaUbicacion);
                 }
-    
-                // Leer nueva actividad
+
                 String nuevaActividad = TJOption.leerString("Ingrese la nueva descripción de la actividad (dejar vacío para mantener):");
                 if (!nuevaActividad.trim().isEmpty()) {
                     compromisoExistente.setActividades(nuevaActividad);
@@ -275,17 +260,14 @@ public class MyApp {
     public void eliminarCompromiso() throws ExcepcionDeListaVacia, ExcepcionDeElementoNoEncontrado {
         String nombreExperto = TJOption.leerString("Ingrese el nombre del experto del compromiso a eliminar:");
         Date fechaInicio = leerFecha("Ingrese la fecha de inicio del compromiso a eliminar");
-    
-        // Buscar el compromiso en la agenda
+
         for (int i = 1; i <= agenda.size(); i++) {
             Agenda compromisoExistente = agenda.getItem(i);
             Experto experto = expertos.getItem(i);
-    
-            // Verificar si el compromiso pertenece al experto y coincide la fecha de inicio
+
             if (experto.getNombre().equalsIgnoreCase(nombreExperto) &&
                 compromisoExistente.getFechaInicio().equals(fechaInicio)) {
-    
-                // Eliminar el compromiso
+
                 agenda.delete(i);
                 TJOption.imprimePantalla("Compromiso eliminado exitosamente.");
                 return;
@@ -301,12 +283,10 @@ public class MyApp {
     StringBuilder sb = new StringBuilder("Agenda de " + nombreExperto + ":");
     boolean hayCompromisos = false;
 
-    // Buscar los compromisos en la agenda
         for (int i = 1; i <= agenda.size(); i++) {
             Agenda compromiso = agenda.getItem(i);
             Experto experto = expertos.getItem(i);
 
-            // Verificar si el compromiso pertenece al experto
             if (experto.getNombre().equalsIgnoreCase(nombreExperto)) {
                 hayCompromisos = true;
                 sb.append(compromiso.toString()).append("\n");
