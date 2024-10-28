@@ -1,7 +1,9 @@
 package app;
 import java.util.Date;
+import java.io.Serializable;
 
-public class Agenda {
+public class Agenda implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Date fechaInicio;
     private Date fechaFin;
     private String ubicacion;
@@ -53,18 +55,16 @@ public class Agenda {
     public Experto getContacto() {
         return this.contacto;
     }
-    public void setContacto(Experto contacto) {
-        this.contacto = contacto;
-    }
 
     public Experto getTelefonoContacto() {
         return this.telefonoContacto;
     }
-    public void setTelefonoContacto(Experto telefonoContacto) {
-        this.telefonoContacto = telefonoContacto;
-    }
-    public boolean choca(ListaDinamica<Agenda> agenda) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'choca'");
+
+    @Override
+	public String toString() {
+		return super.toString() + "\nActividad: "+ actividades +
+        "\nFecha de inicio: " + fechaInicio +
+        "\nFecha de Fin: " + fechaFin +
+        "\nUbicación: "+ ubicacion;
     }
 }

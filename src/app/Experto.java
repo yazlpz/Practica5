@@ -1,13 +1,14 @@
 package app;
+import java.io.Serializable;
 
-public class Experto {
+public class Experto implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String nombre;
     private String especialdad;
     private String areaInteres;
     private String ubicacionFija;
     private String contacto;
     private String telefonoContacto;
-    private ListaDinamica<Agenda> agenda;
 
     public Experto() {
 		super();
@@ -62,10 +63,6 @@ public class Experto {
     }
     public void setTelefonoContacto(String telefonoContacto) {
         this.telefonoContacto = telefonoContacto;
-    }
-
-    public ListaDinamica<Agenda> getAgenda() {
-        return this.agenda;
     }
 
     @Override
